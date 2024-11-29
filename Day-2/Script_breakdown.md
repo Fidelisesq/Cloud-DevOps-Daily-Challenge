@@ -117,7 +117,39 @@ for bucket in deletion_queue:
 
 ## Sample Output
 Here is my output when I ran `python s3-analysis.py`
+```
+Input: Name: prod-data, Region: us-west-2, Size: 120 GB, Versioning: Enabled
+Name: dev-app-logs, Region: us-east-1, Size: 10 GB, Versioning: Disabled
+Name: backup, Region: eu-central-1, Size: 80 GB, Versioning: Enabled
+Name: audit-logs, Region: ap-southeast-1, Size: 50 GB, Versioning: Enabled
+Name: test-results, Region: us-west-1, Size: 15 GB, Versioning: Disabled
+Name: old-backups, Region: us-east-2, Size: 200 GB, Versioning: Enabled
+Name: staging-resources, Region: eu-west-1, Size: 30 GB, Versioning: Disabled
+Name: app-analytics, Region: ap-northeast-1, Size: 250 GB, Versioning: Enabled
+Name: raw-data, Region: us-west-2, Size: 90 GB, Versioning: Disabled
+Name: compliance-data, Region: ca-central-1, Size: 300 GB, Versioning: Enabled
 
+Cost Report by Region:
+us-west-2: $4.83
+us-east-1: $0.23
+eu-central-1: $1.84
+ap-southeast-1: $1.15
+us-west-1: $0.34
+us-east-2: $4.60
+eu-west-1: $0.69
+ap-northeast-1: $5.75
+ca-central-1: $6.90
+
+Cost Report by Department:
+analytics: $8.51
+engineering: $0.23
+ops: $6.44
+security: $1.15
+qa: $0.34
+development: $0.69
+data-engineering: $2.07
+compliance: $6.90
+```
 
 
 
