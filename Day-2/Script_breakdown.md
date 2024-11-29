@@ -151,6 +151,79 @@ data-engineering: $2.07
 compliance: $6.90
 ```
 
+```
+Buckets Recommended for Cleanup:
+- Name: prod-data, Region: us-west-2, Size: 120 GB
+- Name: backup, Region: eu-central-1, Size: 80 GB
+- Name: old-backups, Region: us-east-2, Size: 200 GB
+- Name: app-analytics, Region: ap-northeast-1, Size: 250 GB
+- Name: raw-data, Region: us-west-2, Size: 90 GB
+- Name: compliance-data, Region: ca-central-1, Size: 300 GB
 
+Buckets in Deletion Queue:
+- Name: prod-data, Region: us-west-2, Size: 120 GB, Days Unused: 414
+- Name: old-backups, Region: us-east-2, Size: 200 GB, Days Unused: 1567
+- Name: app-analytics, Region: ap-northeast-1, Size: 250 GB, Days Unused: 1352
+- Name: compliance-data, Region: ca-central-1, Size: 300 GB, Days Unused: 1063
+
+Final List of Buckets to Delete or Archive:
+- Name: prod-data, Region: us-west-2, Size: 120 GB, Days Unused: 414 [Move to Glacier]
+- Name: old-backups, Region: us-east-2, Size: 200 GB, Days Unused: 1567 [Move to Glacier]
+- Name: app-analytics, Region: ap-northeast-1, Size: 250 GB, Days Unused: 1352 [Move to Glacier]
+- Name: compliance-data, Region: ca-central-1, Size: 300 GB, Days Unused: 1063 [Move to Glacier]
+Name: prod-data, Region: us-west-2, Size: 120 GB, Versioning: Enabled
+Name: dev-app-logs, Region: us-east-1, Size: 10 GB, Versioning: Disabled
+Name: backup, Region: eu-central-1, Size: 80 GB, Versioning: Enabled
+Name: audit-logs, Region: ap-southeast-1, Size: 50 GB, Versioning: Enabled
+Name: test-results, Region: us-west-1, Size: 15 GB, Versioning: Disabled
+Name: old-backups, Region: us-east-2, Size: 200 GB, Versioning: Enabled
+Name: staging-resources, Region: eu-west-1, Size: 30 GB, Versioning: Disabled
+Name: app-analytics, Region: ap-northeast-1, Size: 250 GB, Versioning: Enabled
+Name: raw-data, Region: us-west-2, Size: 90 GB, Versioning: Disabled
+Name: compliance-data, Region: ca-central-1, Size: 300 GB, Versioning: Enabled
+
+Cost Report by Region:
+us-west-2: $4.83
+us-east-1: $0.23
+eu-central-1: $1.84
+ap-southeast-1: $1.15
+us-west-1: $0.34
+us-east-2: $4.60
+eu-west-1: $0.69
+ap-northeast-1: $5.75
+ca-central-1: $6.90
+```
+
+```
+Cost Report by Department:
+analytics: $8.51
+engineering: $0.23
+ops: $6.44
+security: $1.15
+qa: $0.34
+development: $0.69
+data-engineering: $2.07
+compliance: $6.90
+
+Buckets Recommended for Cleanup:
+- Name: prod-data, Region: us-west-2, Size: 120 GB
+- Name: backup, Region: eu-central-1, Size: 80 GB
+- Name: old-backups, Region: us-east-2, Size: 200 GB
+- Name: app-analytics, Region: ap-northeast-1, Size: 250 GB
+- Name: raw-data, Region: us-west-2, Size: 90 GB
+- Name: compliance-data, Region: ca-central-1, Size: 300 GB
+
+Buckets in Deletion Queue:
+- Name: prod-data, Region: us-west-2, Size: 120 GB, Days Unused: 414
+- Name: old-backups, Region: us-east-2, Size: 200 GB, Days Unused: 1567
+- Name: app-analytics, Region: ap-northeast-1, Size: 250 GB, Days Unused: 1352
+- Name: compliance-data, Region: ca-central-1, Size: 300 GB, Days Unused: 1063
+
+Final List of Buckets to Delete or Archive:
+- Name: prod-data, Region: us-west-2, Size: 120 GB, Days Unused: 414 [Move to Glacier]
+- Name: old-backups, Region: us-east-2, Size: 200 GB, Days Unused: 1567 [Move to Glacier]
+- Name: app-analytics, Region: ap-northeast-1, Size: 250 GB, Days Unused: 1352 [Move to Glacier]
+- Name: compliance-data, Region: ca-central-1, Size: 300 GB, Days Unused: 1063 [Move to Glacier]
+```
 
 
