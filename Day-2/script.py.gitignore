@@ -6,17 +6,14 @@ with open('buckets.json') as file:
     data = json.load(file)
     buckets = data["buckets"]
 
-# Function to calculate days since last accessed
+# Function to calculate days since created
 def days_since_created(created_on):
     created_date = datetime.strptime(created_on, '%Y-%m-%d')
     return (datetime.now() - created_date).days
 
 # Function to print bucket summary
 def print_bucket_summary(bucket):
-    print(f"Name: {bucket['name']}")
-    print(f"Region: {bucket['region']}")
-    print(f"Size (GB): {bucket['sizeGB']}")
-    print(f"Versioning: {'Enabled' if bucket['versioning'] else 'Disabled'}\n")
+    print(f"Name: {bucket['name']}, Region: {bucket['region']}, Size: {bucket['sizeGB']} GB, Versioning: {'Enabled' if bucket['versioning'] else 'Disabled'}")
 
 # Initialize data structures for reports
 large_unused_buckets = []
@@ -61,17 +58,17 @@ for department, cost in department_costs.items():
 # Print cleanup recommendations
 print("\nBuckets Recommended for Cleanup:")
 for bucket in cleanup_candidates:
-    print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB)")
+    print(f"- Name: {bucket['name']}, Region: {bucket['region']}, Size: {bucket['sizeGB']} GB")
 
 # Print deletion queue
 print("\nBuckets in Deletion Queue:")
 for bucket in deletion_queue:
-    print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB)")
+    print(f"- Name: {bucket['name']}, Region: {bucket['region']}, Size: {bucket['sizeGB']} GB, Days Unused: {days_since_created(bucket['createdOn'])}")
 
 # Final list of buckets to delete or archive
 print("\nFinal List of Buckets to Delete or Archive:")
 for bucket in deletion_queue:
     if bucket['sizeGB'] > 100:
-        print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB) [Move to Glacier]")
+        print(f"- Name: {bucket['name']}, Region: {bucket['region']}, Size: {bucket['sizeGB']} GB, Days Unused: {days_since_created(bucket['createdOn'])} [Move to Glacier]")
     else:
-        print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB) [Delete]")
+        print(f"- Name: {bucket['name']}, Region: {bucket['region']}, Size: {bucket['sizeGB']} GB, Days Unused: {days_since_created(bucket['createdOn'])} [Delete]")
