@@ -1,5 +1,5 @@
 # Advanced S3 Bucket Metadata Manipulation
-[Output](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-2/Script_output3.png)
+![Output](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-2/Script_output3.png)
 ## Objective
 Using a Python script to analyse, modify, and optimise AWS S3 bucket metadata from a JSON file. The script should achieve the following:
 - Print a summary of each bucket: Name, region, size (in GB), and versioning status
