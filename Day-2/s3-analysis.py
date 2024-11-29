@@ -3,19 +3,20 @@ from datetime import datetime, timedelta
 
 # Load the JSON file
 with open('buckets.json') as file:
-    buckets = json.load(file)
+    data = json.load(file)
+    buckets = data["buckets"]
 
 # Function to calculate days since last accessed
-def days_since_last_accessed(last_accessed):
-    last_accessed_date = datetime.strptime(last_accessed, '%Y-%m-%d')
-    return (datetime.now() - last_accessed_date).days
+def days_since_created(created_on):
+    created_date = datetime.strptime(created_on, '%Y-%m-%d')
+    return (datetime.now() - created_date).days
 
 # Function to print bucket summary
 def print_bucket_summary(bucket):
-    print(f"Name: {bucket['Name']}")
-    print(f"Region: {bucket['Region']}")
-    print(f"Size (GB): {bucket['SizeGB']}")
-    print(f"Versioning: {'Enabled' if bucket['Versioning'] else 'Disabled'}\n")
+    print(f"Name: {bucket['name']}")
+    print(f"Region: {bucket['region']}")
+    print(f"Size (GB): {bucket['sizeGB']}")
+    print(f"Versioning: {'Enabled' if bucket['versioning'] else 'Disabled'}\n")
 
 # Initialize data structures for reports
 large_unused_buckets = []
@@ -30,21 +31,23 @@ for bucket in buckets:
     print_bucket_summary(bucket)
     
     # Identify buckets larger than 80 GB and unused for 90+ days
-    if bucket['SizeGB'] > 80 and days_since_last_accessed(bucket['LastAccessed']) > 90:
+    if bucket['sizeGB'] > 80 and days_since_created(bucket['createdOn']) > 90:
         large_unused_buckets.append(bucket)
     
     # Highlight buckets for cleanup and deletion queue
-    if bucket['SizeGB'] > 50:
+    if bucket['sizeGB'] > 50:
         cleanup_candidates.append(bucket)
-    if bucket['SizeGB'] > 100 and days_since_last_accessed(bucket['LastAccessed']) > 20:
+    if bucket['sizeGB'] > 100 and days_since_created(bucket['createdOn']) > 20:
         deletion_queue.append(bucket)
     
     # Calculate costs for reports
-    region_costs.setdefault(bucket['Region'], 0)
-    region_costs[bucket['Region']] += bucket['SizeGB'] * bucket['CostPerGB']
+    cost_per_gb = 0.023 # Assuming a cost per GB
+    region_costs.setdefault(bucket['region'], 0)
+    region_costs[bucket['region']] += bucket['sizeGB'] * cost_per_gb
     
-    department_costs.setdefault(bucket['Department'], 0)
-    department_costs[bucket['Department']] += bucket['SizeGB'] * bucket['CostPerGB']
+    department = bucket['tags']['team']
+    department_costs.setdefault(department, 0)
+    department_costs[department] += bucket['sizeGB'] * cost_per_gb
 
 # Generate cost reports
 print("\nCost Report by Region:")
@@ -58,17 +61,17 @@ for department, cost in department_costs.items():
 # Print cleanup recommendations
 print("\nBuckets Recommended for Cleanup:")
 for bucket in cleanup_candidates:
-    print(f"- {bucket['Name']} (Size: {bucket['SizeGB']} GB)")
+    print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB)")
 
 # Print deletion queue
 print("\nBuckets in Deletion Queue:")
 for bucket in deletion_queue:
-    print(f"- {bucket['Name']} (Size: {bucket['SizeGB']} GB)")
+    print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB)")
 
 # Final list of buckets to delete or archive
 print("\nFinal List of Buckets to Delete or Archive:")
 for bucket in deletion_queue:
-    if bucket['SizeGB'] > 100:
-        print(f"- {bucket['Name']} (Size: {bucket['SizeGB']} GB) [Move to Glacier]")
+    if bucket['sizeGB'] > 100:
+        print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB) [Move to Glacier]")
     else:
-        print(f"- {bucket['Name']} (Size: {bucket['SizeGB']} GB) [Delete]")
+        print(f"- {bucket['name']} (Size: {bucket['sizeGB']} GB) [Delete]")
