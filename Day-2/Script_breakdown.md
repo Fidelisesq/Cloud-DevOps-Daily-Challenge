@@ -18,5 +18,11 @@ from datetime import datetime, timedelta
 - json: This module is used to parse JSON data.
 - datetime, timedelta: These are used to handle dates and times.
 
+```python
+with open('buckets.json') as file:
+    data = json.load(file)
+    buckets = data["buckets"]
+
+
 
 
