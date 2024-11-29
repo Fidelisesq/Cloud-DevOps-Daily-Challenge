@@ -12,8 +12,8 @@ Using a Python script to analyse, modify, and optimise AWS S3 bucket metadata fr
 
 ### Script Documentation & Explanation
 `import json
-from datetime import datetime, timedelta
 `
+`from datetime import datetime, timedelta`
 - json: This module is used to parse JSON data.
 - datetime, timedelta: These are used to handle dates and times.
 
