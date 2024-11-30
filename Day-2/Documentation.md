@@ -226,4 +226,11 @@ Final List of Buckets to Delete or Archive:
 - Name: compliance-data, Region: ca-central-1, Size: 300 GB, Days Unused: 1063 [Move to Glacier]
 ```
 
+## Challenges
+- Data Parsing Issues: Initially faced issues with JSON parsing due to structure variations. 🛠️
+- Colorisation in Terminal: Implementing colored output for better readability took some trial and error. Copilot helped me here 🎨
+- Debugging and Validation: Ensuring accurate bucket metadata and handling edge cases was critical. 🕵️‍♂️
+
+## Conclusion
+This analysis is crucial for organisations to manage their cloud resources effectively, optimise costs, and ensure efficient storage utilisation. Regular audits and optimisations can lead to significant savings and better resource allocation.
 
