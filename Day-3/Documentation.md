@@ -108,3 +108,10 @@ Open the `aggregated_logs.txt` file to ensure all logs are captured
 ```python
 rabbitmqctl set_user_tags username management
 ```
+- Port configuration and permission management. At first, I could not create the `logs_queue` as it was returning `Access Denied`. Then, I granted my user the needed permission to vHosts and created EC2 Security group that allows TCP port 15672 to access the RabbitMQ management console.
+
+### Key Learnings
+- Enabling Management Plugin: I learnt to enable and use the RabbitMQ management plugin for web-based monitoring and management.
+- User and Permission Management: Gained skills in creating users, setting passwords, and managing permissions in RabbitMQ.
+- Queue Management: I learned how to create and manage queues both via the management interface and command line.
+- Port Configuration: Understanding the importance of configuring and managing RabbitMQ ports (5672 for AMQP traffic and 15672 for the management console). 
