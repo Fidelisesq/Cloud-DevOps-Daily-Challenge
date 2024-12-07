@@ -1,7 +1,7 @@
 # Distributed Logging System with RabbitMQ
 ![RabbitMQ_logs_queue](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Queue-UI.png)
 
-Below is the setup procedure for my centralised distributed logging. This system is essential for log management, message queues, and monitoring, which are critical to modern DevOps practices. The system setup includes a log producer and consumer system using RabbitMQ, which can aggregate them into a file for analysis.
+Below is the setup procedure for my centralised distributed logging system. This system is essential for log management, message queues, and monitoring, which are critical to modern DevOps practices. The system setup includes a log producer and consumer system using RabbitMQ, which can aggregate them into a file for analysis.
 
 ## System Setup Guide
 
