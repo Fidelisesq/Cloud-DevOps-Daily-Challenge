@@ -85,7 +85,7 @@ sudo rabbitmqctl list_queues
 ![logs_queue](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Queue-UI.png)
 
 ### 10. Install Required Python Libraries
-Install pika and write a python script that will produce logs and consume them. ![See tutorial on Rabbitmq Doc](https://www.rabbitmq.com/tutorials/tutorial-one-python) or check my script log_producer.py & log_aggregtor.py
+Install pika and write a python script that will produce logs and consume them. See tutorial on Rabbitmq Documentation https://www.rabbitmq.com/tutorials/tutorial-one-python or check my script log_producer.py & log_aggregtor.py
 `pip install pika`
 
 Run the producer script 
