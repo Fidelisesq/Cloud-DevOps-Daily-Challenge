@@ -1,6 +1,7 @@
 # Distributed Logging System with RabbitMQ
+!(RabbitMQ_logs_queue)[https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Queue-UI.png]
 
-Below is the setup procedure for my centralised distributed logging. This system is essentials for log management, message queues, and monitoring, which are critical to modern DevOps practices. The system setup includes a log producer and consumer system using RabbitMQ, which can aggregate them into a file for analysis.
+Below is the setup procedure for my centralised distributed logging. This system is essential for log management, message queues, and monitoring, which are critical to modern DevOps practices. The system setup includes a log producer and consumer system using RabbitMQ, which can aggregate them into a file for analysis.
 
 ## System Setup Guide
 
@@ -11,7 +12,7 @@ First, install RabbitMQ on your server. Follow the installation instructions for
 sudo apt update
 sudo apt install rabbitmq-server -y
 ```
-
+!(RabbitMQ_server_running)[https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Rabbitmq%20server%20running%20with%20queue%20created.png]
 ### 2. Enable RabbitMQ Management Plugin
 The management plugin provides a user interface and HTTP-based API for managing RabbitMQ. Run the following command to enable it:
 
@@ -81,6 +82,7 @@ You may also verify using CLI command to see the queue
 ```sh
 sudo rabbitmqctl list_queues
 ```
+!(logs_queue)[https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Queue-UI.png]
 
 ### 10. Install Required Python Libraries
 Install pika and write a python script that will produce logs and consume them. See tutorials here !(See tutorial on Rabbitmq Doc)[https://www.rabbitmq.com/tutorials/tutorial-one-python] or check my script log_producer.py & log_aggregtor.py
@@ -99,6 +101,7 @@ python3 log aggregator.py
 
 ### Verify Logs
 Open the `aggregated_logs.txt` file to ensure all logs are captured
+!(log captured)[https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Log%20entries.png]
 
 ### Challenges
 - After creating a queue sucessfully, I could not log in into the `RabbitMQ Management` console with the credentials I created. I discovered I had to tag the user as part of `Management` to be able to login. 
