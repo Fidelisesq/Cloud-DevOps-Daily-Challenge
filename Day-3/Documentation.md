@@ -99,18 +99,18 @@ python3 log aggregator.py
 ```
 `Note:` Perform step 10 several times with different messages to send and capture multiple logs
 
-### Verify Logs
+### 11. Verify Logs
 Open the `aggregated_logs.txt` file to ensure all logs are captured
 ![log captured](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Log%20entries.png)
 
-### Challenges
+## Challenges
 - After creating a queue sucessfully, I could not log in into the `RabbitMQ Management` console with the credentials I created. I discovered I had to tag the user as part of `Management` to be able to login. 
 ```python
 rabbitmqctl set_user_tags username management
 ```
 - Port configuration and permission management. At first, I could not create the `logs_queue` as it was returning `Access Denied`. Then, I granted my user the needed permission to vHosts and created EC2 Security group that allows TCP port 15672 to access the RabbitMQ management console.
 
-### Key Learnings
+## Key Learnings
 - Enabling Management Plugin: I learnt to enable and use the RabbitMQ management plugin for web-based monitoring and management.
 - User and Permission Management: Gained skills in creating users, setting passwords, and managing permissions in RabbitMQ.
 - Queue Management: I learned how to create and manage queues both via the management interface and command line.
