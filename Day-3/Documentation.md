@@ -1,8 +1,15 @@
-# Distributed Logging System
+# Distributed Logging System with RabbitMQ
 
+Below is the setup procedure for my centralised distributed logging. This system is essentials for log management, message queues, and monitoring, which are critical to modern DevOps practices. The system setup includes a log producer and consumer system using RabbitMQ, which can aggregate them into a file for analysis.
+
+## System Setup Guide
 
 ### 1. Install RabbitMQ
-First, install RabbitMQ on your server. Follow the installation instructions for your specific operating system from the official RabbitMQ website: [RabbitMQ Installation Guide](https://www.rabbitmq.com/download.html).
+First, install RabbitMQ on your server. Follow the installation instructions for your specific operating system from the official RabbitMQ website: [RabbitMQ Installation Guide](https://www.rabbitmq.com/download.html). I installed RabbitMQ on AWS EC2 running Ubuntu
+
+```sh
+sudo apt update
+sudo apt install rabbitmq-server -y
 
 ### 2. Enable RabbitMQ Management Plugin
 The management plugin provides a user interface and HTTP-based API for managing RabbitMQ. Run the following command to enable it:
@@ -16,35 +23,40 @@ _This command enables the RabbitMQ management plugin, allowing access to the web
 Create a new RabbitMQ user with a specific username and password:
 
 ```sh
-rabbitmqctl add_user alice secret_password
+rabbitmqctl add_user rabituser secret_password
 ```
-_This command creates a new user named `alice` with the password `secret_password`._
+_This command creates a new user named `rabbituser` with the password `secret_password`._
 
 ### 4. Set Permissions for the User
 Grant the user permissions to access and manage resources:
 
 ```sh
-rabbitmqctl set_permissions -p / alice ".*" ".*" ".*"
+rabbitmqctl set_permissions -p / rabbituser ".*" ".*" ".*"
 ```
-_This command gives the user `alice` full permissions (read, write, and configure) on the default virtual host `/`._
+_This command gives the user `rabbituser` full permissions (read, write, and configure) on the default virtual host `/`._
 
 ### 5. Add Management Tag to the User
 Grant the user access to the RabbitMQ management interface:
 
 ```sh
-rabbitmqctl set_user_tags alice management
+rabbitmqctl set_user_tags rabbituser management
 ```
-_This command adds the `management` tag to the user `alice`, allowing them to log in to the RabbitMQ management interface._
+_This command adds the `management` tag to the user `rabbituser`, allowing them to log in to the RabbitMQ management interface._
 
-### 6. Access the RabbitMQ Management Interface
-Open your web browser and navigate to `http://<your_rabbitmq_server>:15672/`. Log in with the username `alice` and the password you set.
+### 6. Configuring External Network Access
+Edit the `/etc/rabbitmq/rabbitmq.conf` file to allow external access because `RabbitMQ` blocks localhost access by default. Add the configuration below
+`listeners.tcp.default = 5672`
+Now restart the system
+```sh
+sudo systemctl restart rabbitmq-server
+```
 
 ### 7. Add a Queue
 Once logged in, follow these steps to add a queue:
 
 - Click on the "Queues" tab.
 - Click on "Add a new queue".
-- Enter the name of the queue (e.g., `my_queue`) and configure any additional settings as needed.
+- Enter the name of the queue (e.g., `logs_queue`) and configure any additional settings as needed.
 - Click the "Add queue" button to create the queue.
 
 ### 8. Adding Queue via CLI (Optional)
@@ -57,9 +69,16 @@ Alternatively, you can add a queue using the `rabbitmqadmin` command-line tool:
    ```
 3. **Declare a Queue**:
    ```sh
-   ./rabbitmqadmin declare queue name=my_queue durable=true
+   ./rabbitmqadmin declare queue name=logs_queue durable=true
    ```
-   _This command creates a durable queue named `my_queue`._
+   _This command creates a durable queue named `logs_queue`._
+
+### 9. Access the RabbitMQ Management Interface
+Open your web browser and navigate to `http://<your_rabbitmq_server>:15672/`. Log in with the username `rabbituser` and the password you set to verify that `logs_queue` that you created exists. 
+You may also verify using CLI command to see the queue
+```sh
+sudo rabbitmqctl list_queues
+```
 
 ### Challenges
 - After creating a queue sucessfully, I could not log in into the `RabbitMQ Management` console with the credentials I created. I discovered I had to tag the user as part of `Management` to be able to login. 
