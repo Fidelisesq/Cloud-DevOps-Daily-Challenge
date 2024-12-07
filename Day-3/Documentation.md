@@ -12,7 +12,9 @@ First, install RabbitMQ on your server. Follow the installation instructions for
 sudo apt update
 sudo apt install rabbitmq-server -y
 ```
+
 `Note: Ensure you add an inbound rule in the EC2 Security Group that allows SSH preferably from your IP alone`
+
 ![RabbitMQ_server_running](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-3/Images/Rabbitmq%20server%20running%20with%20queue%20created.png)
 ### 2. Enable RabbitMQ Management Plugin
 The management plugin provides a user interface and HTTP-based API for managing RabbitMQ. Run the following command to enable it:
