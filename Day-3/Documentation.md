@@ -80,6 +80,24 @@ You may also verify using CLI command to see the queue
 sudo rabbitmqctl list_queues
 ```
 
+### 10. Install Required Python Libraries
+Install pika and write a python script that will produce logs and consume them. See tutorials here !(See tutorial on Rabbitmq Doc)[https://www.rabbitmq.com/tutorials/tutorial-one-python] or check my script log_producer.py & log_aggregtor.py
+`pip install pika`
+
+Run the producer script 
+```python
+python3 log_prodcer.py "Log Entry 1: Data ready for processing in AWS Lambda"
+```
+
+Run the consumer script. 
+```python
+python3 log aggregator.py
+```
+`Note:` Perform step 10 several times with different messages to send and capture multiple logs
+
+### Verify Logs
+Open the `aggregated_logs.txt` file to ensure all logs are captured
+
 ### Challenges
 - After creating a queue sucessfully, I could not log in into the `RabbitMQ Management` console with the credentials I created. I discovered I had to tag the user as part of `Management` to be able to login. 
 ```python
