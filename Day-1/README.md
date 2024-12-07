@@ -16,6 +16,5 @@ Understanding system health checks is crucial for maintaining high reliability a
 
 > Use environment variables for storing sensitive email credentials securely.
 
-
 ![script-output](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-1/script%20output.png)
 
