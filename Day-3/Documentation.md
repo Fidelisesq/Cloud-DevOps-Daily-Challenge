@@ -5,7 +5,7 @@ Below is the setup procedure for my centralised distributed logging. This system
 ## System Setup Guide
 
 ### 1. Install RabbitMQ
-First, install RabbitMQ on your server. Follow the installation instructions for your specific operating system from the official RabbitMQ website: [RabbitMQ Installation Guide](https://www.rabbitmq.com/download.html). I installed RabbitMQ on AWS EC2 running Ubuntu
+First, install RabbitMQ on your server. Follow the installation instructions for your specific operating system from the official RabbitMQ website: https://www.rabbitmq.com/download.html I installed RabbitMQ on AWS EC2 running Ubuntu
 
 ```sh
 sudo apt update
