@@ -10,6 +10,7 @@ First, install RabbitMQ on your server. Follow the installation instructions for
 ```sh
 sudo apt update
 sudo apt install rabbitmq-server -y
+```
 
 ### 2. Enable RabbitMQ Management Plugin
 The management plugin provides a user interface and HTTP-based API for managing RabbitMQ. Run the following command to enable it:
@@ -44,8 +45,9 @@ rabbitmqctl set_user_tags rabbituser management
 _This command adds the `management` tag to the user `rabbituser`, allowing them to log in to the RabbitMQ management interface._
 
 ### 6. Configuring External Network Access
-Edit the `/etc/rabbitmq/rabbitmq.conf` file to allow external access because `RabbitMQ` blocks localhost access by default. Add the configuration below
-`listeners.tcp.default = 5672`
+Edit the `/etc/rabbitmq/rabbitmq.conf` file to allow external access because `RabbitMQ` blocks localhost access by default. Add the configuration.
+
+```listeners.tcp.default = 5672```
 Now restart the system
 ```sh
 sudo systemctl restart rabbitmq-server
