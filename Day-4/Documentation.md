@@ -1,6 +1,6 @@
 # RabbitMQ Monitoring with Prometheus and Grafana
 
-In this blog, I’ll walk you through the setup of a RabbitMQ environment that includes a **local Docker Compose setup** for quick testing and a **3-node RabbitMQ cluster setup on AWS EC2** for scalability and real-world applications. Additionally, we’ll integrate **Prometheus and Grafana** for monitoring, ensuring robust observability. 
+In this project, I completed two setups for RabbitMQ monitoring with Prometheus and Grafana. The first setup is a **local Docker Compose setup** for quick testing while the other is a **3-node RabbitMQ cluster setup on AWS EC2** for scalability and real-world applications.
 
 ### Overview of the Project
 
@@ -25,18 +25,21 @@ The local setup serves as a quick testing environment before deploying to the cl
    ```
 
 2. **Run Docker Compose:**
+   Use Docker Compose to start the RabbitMQ cluster and Prometheus instance, along with a basic workload to generate       
+   meaningful metrics. This will start a RabbitMQ cluster, Prometheus, and Grafana with predefined configurations, 
+   collecting metrics from RabbitMQ.
    ```bash
    docker-compose -f docker-compose-metrics.yml up -d
    docker-compose -f docker-compose-overview.yml up -d
    ```
 
-3. **Access RabbitMQ Dashboard:**
+4. **Access RabbitMQ Dashboard:**
    - URL: `http://localhost:15672`
    - Default credentials:  
      Username: `guest`  
      Password: `guest`
 
-4. **Access Grafana Dashboard:**  
+5. **Access Grafana Dashboard:**  
    - URL: `http://localhost:3000`  
    - Default credentials:  
      Username: `admin`  
