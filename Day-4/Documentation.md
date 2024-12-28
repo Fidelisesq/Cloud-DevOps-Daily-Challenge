@@ -185,6 +185,7 @@ def callback(ch, method, properties, body):
 channel.basic_consume(queue='test_queue', on_message_callback=callback, auto_ack=True)
 channel.start_consuming()
 ```
+`Grafana showing metrics scrapped by Prometheus`
 ![Grafana_Metrics](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/grafana.png)
 <br><br>
 ![Grafana_Metrics_2](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/grafana-2.png)
