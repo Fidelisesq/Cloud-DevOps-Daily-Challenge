@@ -153,6 +153,7 @@ To ensure high availability and load distribution in production.
 3. **Verify Metrics on Grafana:**
    - URL: `http://<grafana-ip>:3000`
    - Navigate to imported RabbitMQ dashboards to monitor metrics.
+     <br><br>
      ![Grafana_Running](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/graphana-running.png)
 ---
 
