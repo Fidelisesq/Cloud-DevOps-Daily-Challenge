@@ -32,9 +32,9 @@ The local setup serves as a quick testing environment before deploying to the cl
    docker-compose -f docker-compose-metrics.yml up -d
    docker-compose -f docker-compose-overview.yml up -d
    ```
-![Docker compose](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-metrics.png)
-
-![Rabbit_Prometheus_Containers](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-Prometheus-Grafana-containers.png)
+   ![Docker compose](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-metrics.png)
+   <br><br>
+   ![Rabbit_Prometheus_Containers](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-Prometheus-Grafana-containers.png)
 
 4. **Access RabbitMQ Dashboard:**
    - URL: `http://localhost:15672`
@@ -47,6 +47,7 @@ The local setup serves as a quick testing environment before deploying to the cl
    - Default credentials:  
      Username: `admin`  
      Password: `admin`
+     <br><br>
 ![Grafana_dashboard](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Grafana%20RabbitmQ%20Metric%20dashboard.png)
 <br><br>
 ![Grafana_dashboard_2](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Grafana%20RabbitmQ%20Metric%20dashboard-2.png)
