@@ -60,34 +60,35 @@ The local setup serves as a quick testing environment before deploying to the cl
 To ensure high availability and load distribution in production.
 
 #### Prerequisites
-- Three AWS EC2 instances running Ubuntu 24.04.
-- Security groups allowing necessary ports (e.g., 4369, 25672, 15692, 15672).
+3 AWS EC2 instances running Ubuntu 24.04 for RabbitMQ and one each for Prometheus and Grafana. Configure the Security Groups as follows:
+
+- **RabbitMQ Security Groups**:
+  - Allow SSH (port 22) from your IP.
+  - Allow RabbitMQ Management UI (port 15672) from your IP.
+  - Allow RabbitMQ Prometheus Metrics (port 15692) from Prometheus instance SG.
+
+- **Prometheus Security Groups**:
+  - Allow HTTP (port 80) from your IP.
+  - Allow HTTPS (port 443) from your IP.
+  - Allow Grafana (port 3000) from your IP.
+
+- **Grafana Security Groups**:
+  - Allow HTTP (port 80) from your IP.
+  - Allow HTTPS (port 443) from your IP.
+
 
 #### Step-by-Step Guide
 
-1. **Install RabbitMQ on All Nodes:**
-   Use the following **bash script** as EC2 user data during instance launch:
-
-   ```bash
-   #!/bin/bash
-   sudo apt update -y
-   sudo apt upgrade -y
-   sudo apt install -y curl gnupg software-properties-common
-   curl -fsSL https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey | sudo apt-key add -
-   sudo apt-add-repository "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ focal main"
-   sudo apt update -y
-   sudo apt install -y rabbitmq-server
-   sudo systemctl enable rabbitmq-server
-   sudo systemctl start rabbitmq-server
-   sudo rabbitmq-plugins enable rabbitmq_management rabbitmq_prometheus
-   ```
+1. **Install RabbitMQ on All 3 Nodes:**
+   Use the following **bash script** as EC2 user data during instance launch or save it and run on each EC2 instance:
+   The bash script I used is named `rabbitmq_installation.sh` in my git repository.
 
 2. **Cluster Configuration:**
    - Verify Erlang cookie consistency:
      ```bash
      sudo cat /var/lib/rabbitmq/.erlang.cookie
      ```
-     Ensure the same cookie on all nodes.
+     Ensure the same cookie is on all 3 RabbitMQ EC2 nodes.
    - Join nodes to form a cluster:
      ```bash
      sudo rabbitmqctl stop_app
