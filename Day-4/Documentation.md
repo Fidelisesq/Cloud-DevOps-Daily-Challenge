@@ -81,9 +81,11 @@ To ensure high availability and load distribution in production.
 
 1. **Install RabbitMQ on All 3 Nodes:**
    Use the following **bash script** as EC2 user data during instance launch or save it and run on each EC2 instance:
-   The bash script I used is named `rabbitmq_installation.sh` in my git repository.
+   The bash script I used is named `rabbitmq_installation.sh` in my git repository. It includes all the plugins needed to help Prometheus scrape metrics from RabbitMQ.
 
-2. **Cluster Configuration:**
+   ![RabbitMQ runing](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/rabbitmq-running-1.png)
+
+3. **Cluster Configuration:**
    - Verify Erlang cookie consistency:
      ```bash
      sudo cat /var/lib/rabbitmq/.erlang.cookie
@@ -97,10 +99,11 @@ To ensure high availability and load distribution in production.
      sudo rabbitmqctl start_app
      ```
 
-3. **Verify Cluster Status:**
+4. **Verify Cluster Status:**
    ```bash
    sudo rabbitmqctl cluster_status
    ```
+   ![Rabbit_3_Node_Cluster](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/rabbit_cluster_3_nodes.png)
 
 ---
 
@@ -109,18 +112,12 @@ To ensure high availability and load distribution in production.
 #### Prometheus Setup on AWS EC2
 
 1. **Install Prometheus Using a Bash Script:**
+   I used a Bash script named `prometheus.sh` saved in my repository to install Prometheus and it includes all the plugins needed. Save this script on your Prometheus EC2 and run the script.
    ```bash
-   #!/bin/bash
-   sudo apt update -y
-   sudo apt upgrade -y
-   sudo apt install -y wget tar
-   wget https://github.com/prometheus/prometheus/releases/download/v2.47.0/prometheus-2.47.0.linux-arm64.tar.gz
-   tar xvf prometheus-2.47.0.linux-arm64.tar.gz
-   sudo mv prometheus-2.47.0 /usr/local/prometheus
-   echo 'Prometheus installed.'
+   ./prometheus.sh
    ```
 
-2. **Configure Prometheus:**
+3. **Configure Prometheus:**
    Edit `prometheus.yml` to scrape RabbitMQ metrics:
    ```yaml
    scrape_configs:
@@ -129,10 +126,11 @@ To ensure high availability and load distribution in production.
          - targets: ['<rabbitmq-node-1-ip>:15692', '<rabbitmq-node-2-ip>:15692', '<rabbitmq-node-3-ip>:15692']
    ```
 
-3. **Run Prometheus:**
+4. **Run Prometheus:**
    ```bash
    /usr/local/prometheus/prometheus --config.file=/usr/local/prometheus/prometheus.yml
    ```
+   ![Prometheus_Scrapping_Metrics](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/Prometheus%20scapping%20metrics.png)
 
 #### Grafana Setup on AWS EC2
 
@@ -148,13 +146,13 @@ To ensure high availability and load distribution in production.
    ```
 
 2. **Configure Grafana:**
-   - Add Prometheus as a data source.
-   - Import RabbitMQ dashboards.
+   - Add Prometheus as a data source in Grafana
+   - Import RabbitMQ dashboards - the file is named `RabbitMQ-Overview.json`
 
 3. **Verify Metrics on Grafana:**
    - URL: `http://<grafana-ip>:3000`
    - Navigate to imported RabbitMQ dashboards to monitor metrics.
-
+     ![Grafana_Running](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/graphana-running.png)
 ---
 
 ### Part 4: Testing the Message Queue
@@ -183,6 +181,9 @@ def callback(ch, method, properties, body):
 channel.basic_consume(queue='test_queue', on_message_callback=callback, auto_ack=True)
 channel.start_consuming()
 ```
+![Grafana_Metrics](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/grafana.png)
+<br><br>
+![Grafana_Metrics_2](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/grafana-2.png)
 
 ---
 
