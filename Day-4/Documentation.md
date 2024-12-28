@@ -32,6 +32,8 @@ The local setup serves as a quick testing environment before deploying to the cl
    docker-compose -f docker-compose-metrics.yml up -d
    docker-compose -f docker-compose-overview.yml up -d
    ```
+    ![Docker compose](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-Prometheus-Grafana-Up.png)
+   <br><br>
    ![Docker compose](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-metrics.png)
    <br><br>
    ![Rabbit_Prometheus_Containers](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/Docker_compose_images/Rabbit-Prometheus-Grafana-containers.png)
