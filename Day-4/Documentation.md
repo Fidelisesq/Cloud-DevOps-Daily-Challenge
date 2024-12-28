@@ -83,7 +83,7 @@ To ensure high availability and load distribution in production.
 #### Step-by-Step Guide
 
 1. **Install RabbitMQ on All 3 Nodes:**
-   Use the following **bash script** as EC2 user data during instance launch or save it and run on each EC2 instance:
+   Use a **bash script** as EC2 user data during instance launch or save it and run on each EC2 instance.
    The bash script I used is named `rabbitmq_installation.sh` in my git repository. It includes all the plugins needed to help Prometheus scrape metrics from RabbitMQ.
 
    ![RabbitMQ runing](https://github.com/Fidelisesq/Cloud-DevOps-Daily-Challenge/blob/main/Day-4/3-Node%20AWS%20Setup%20Images/rabbitmq-running-1.png)
